@@ -20,120 +20,121 @@
 
 using namespace aff3ct;
 
+//Simply looking at the environment and printing it out, not needed.
 void print_version()
 {
-#if defined(_WIN64) || defined(_WIN32) || defined(WIN32) || defined(__MINGW32__)
-	std::string os = "Windows";
-#elif defined(__linux__) || defined(__linux)
-	std::string os = "Linux";
-#elif defined(__APPLE__)
-	std::string os = "Mac OS X";
-#else
-	std::string os = "Unknown OS";
-#endif
+	#if defined(_WIN64) || defined(_WIN32) || defined(WIN32) || defined(__MINGW32__)
+		std::string os = "Windows";
+	#elif defined(__linux__) || defined(__linux)
+		std::string os = "Linux";
+	#elif defined(__APPLE__)
+		std::string os = "Mac OS X";
+	#else
+		std::string os = "Unknown OS";
+	#endif
 
-#if defined(__x86_64) || defined(__x86_64__) || defined(_WIN64) || defined(__aarch64__)
-	std::string prec = " 64-bit";
-#elif defined(__i386) || defined(__i386__) || defined(i386) || defined(_WIN32) || defined(__ARM_ARCH_7__)
-	std::string prec = " 32-bit";
-#else
-	std::string prec = "";
-#endif
+	#if defined(__x86_64) || defined(__x86_64__) || defined(_WIN64) || defined(__aarch64__)
+		std::string prec = " 64-bit";
+	#elif defined(__i386) || defined(__i386__) || defined(i386) || defined(_WIN32) || defined(__ARM_ARCH_7__)
+		std::string prec = " 32-bit";
+	#else
+		std::string prec = "";
+	#endif
 
-#if defined(__INTEL_COMPILER) || defined(__ICL) || defined(__ICC)
-	std::string compiler = "icpc";
-#if defined(__INTEL_COMPILER)
-	std::string compiler_version = std::to_string(__INTEL_COMPILER);
-#elif defined(__ICL)
-	std::string compiler_version = std::to_string(__ICL);
-#else
-	std::string compiler_version = std::to_string(__ICC);
-#endif
-	compiler_version = compiler_version.substr(0,2) + "." + compiler_version.substr(2,compiler_version.size());
-#elif defined(__clang__) || defined(__llvm__)
-	std::string compiler = "clang++";
-	std::string compiler_version = std::to_string(__clang_major__);
-	compiler_version += "." + std::to_string(__clang_minor__);
-#elif defined(__GNUG__) || (defined(__GNUC__) && defined(__cplusplus))
-	std::string compiler = "g++";
-	std::string compiler_version = std::to_string(__GNUC__);
-	compiler_version += "." + std::to_string(__GNUC_MINOR__);
-#elif defined(_MSC_VER)
-	std::string compiler = "MSVC++";
-	std::string compiler_version = std::to_string(_MSC_VER);
-#else
-	std::string compiler = "Unknown compiler";
-	std::string compiler_version = "";
-#endif
-	std::string affect_version = tools::version() == "GIT-NOTFOUND" ? "" : tools::version();
+	#if defined(__INTEL_COMPILER) || defined(__ICL) || defined(__ICC)
+		std::string compiler = "icpc";
+	#if defined(__INTEL_COMPILER)
+		std::string compiler_version = std::to_string(__INTEL_COMPILER);
+	#elif defined(__ICL)
+		std::string compiler_version = std::to_string(__ICL);
+	#else
+		std::string compiler_version = std::to_string(__ICC);
+	#endif
+		compiler_version = compiler_version.substr(0,2) + "." + compiler_version.substr(2,compiler_version.size());
+	#elif defined(__clang__) || defined(__llvm__)
+		std::string compiler = "clang++";
+		std::string compiler_version = std::to_string(__clang_major__);
+		compiler_version += "." + std::to_string(__clang_minor__);
+	#elif defined(__GNUG__) || (defined(__GNUC__) && defined(__cplusplus))
+		std::string compiler = "g++";
+		std::string compiler_version = std::to_string(__GNUC__);
+		compiler_version += "." + std::to_string(__GNUC_MINOR__);
+	#elif defined(_MSC_VER)
+		std::string compiler = "MSVC++";
+		std::string compiler_version = std::to_string(_MSC_VER);
+	#else
+		std::string compiler = "Unknown compiler";
+		std::string compiler_version = "";
+	#endif
+		std::string affect_version = tools::version() == "GIT-NOTFOUND" ? "" : tools::version();
 
-#if defined(AFF3CT_MULTI_PREC)
-	std::string precision = "8/16/32/64-bit";
-#elif defined(AFF3CT_8BIT_PREC)
-	std::string precision = "8-bit";
-#elif defined(AFF3CT_16BIT_PREC)
-	std::string precision = "16-bit";
-#elif defined(AFF3CT_32BIT_PREC)
-	std::string precision = "32-bit";
-#elif defined(AFF3CT_64BIT_PREC)
-	std::string precision = "64-bit";
-#else
-	std::string precision = "Unknown";
-#endif
+	#if defined(AFF3CT_MULTI_PREC)
+		std::string precision = "8/16/32/64-bit";
+	#elif defined(AFF3CT_8BIT_PREC)
+		std::string precision = "8-bit";
+	#elif defined(AFF3CT_16BIT_PREC)
+		std::string precision = "16-bit";
+	#elif defined(AFF3CT_32BIT_PREC)
+		std::string precision = "32-bit";
+	#elif defined(AFF3CT_64BIT_PREC)
+		std::string precision = "64-bit";
+	#else
+		std::string precision = "Unknown";
+	#endif
 
-#if defined(AFF3CT_POLAR_BIT_PACKING)
-	std::string bit_packing = "on";
-#else
-	std::string bit_packing = "off";
-#endif
+	#if defined(AFF3CT_POLAR_BIT_PACKING)
+		std::string bit_packing = "on";
+	#else
+		std::string bit_packing = "off";
+	#endif
 
-#if defined(AFF3CT_POLAR_BOUNDS)
-	std::string polar_bounds = "on";
-#else
-	std::string polar_bounds = "off";
-#endif
+	#if defined(AFF3CT_POLAR_BOUNDS)
+		std::string polar_bounds = "on";
+	#else
+		std::string polar_bounds = "off";
+	#endif
 
-#if defined(AFF3CT_COLORS)
-	std::string terminal_colors = "on";
-#else
-	std::string terminal_colors = "off";
-#endif
+	#if defined(AFF3CT_COLORS)
+		std::string terminal_colors = "on";
+	#else
+		std::string terminal_colors = "off";
+	#endif
 
-#if defined(AFF3CT_BACKTRACE)
-	std::string backtrace = "on";
-#else
-	std::string backtrace = "off";
-#endif
+	#if defined(AFF3CT_BACKTRACE)
+		std::string backtrace = "on";
+	#else
+		std::string backtrace = "off";
+	#endif
 
-#if defined(AFF3CT_EXT_STRINGS)
-	std::string ext_strings = "on";
-#else
-	std::string ext_strings = "off";
-#endif
+	#if defined(AFF3CT_EXT_STRINGS)
+		std::string ext_strings = "on";
+	#else
+		std::string ext_strings = "off";
+	#endif
 
-#if defined(AFF3CT_MPI)
-	std::string mpi = "on";
-#else
-	std::string mpi = "off";
-#endif
+	#if defined(AFF3CT_MPI)
+		std::string mpi = "on";
+	#else
+		std::string mpi = "off";
+	#endif
 
-#if defined(AFF3CT_CHANNEL_GSL)
-	std::string gsl = "on";
-#else
-	std::string gsl = "off";
-#endif
+	#if defined(AFF3CT_CHANNEL_GSL)
+		std::string gsl = "on";
+	#else
+		std::string gsl = "off";
+	#endif
 
-#if defined(AFF3CT_CHANNEL_MKL)
-	std::string mkl = "on";
-#else
-	std::string mkl = "off";
-#endif
+	#if defined(AFF3CT_CHANNEL_MKL)
+		std::string mkl = "on";
+	#else
+		std::string mkl = "off";
+	#endif
 
-#if defined(AFF3CT_SYSTEMC_SIMU)
-	std::string systemc = "on";
-#else
-	std::string systemc = "off";
-#endif
+	#if defined(AFF3CT_SYSTEMC_SIMU)
+		std::string systemc = "on";
+	#else
+		std::string systemc = "off";
+	#endif
 
 	std::cout << "aff3ct (" << os << prec << ", " << compiler << "-" << compiler_version << ", "
 	          << mipp::InstructionFullType << ") " << affect_version << std::endl;
@@ -156,13 +157,18 @@ void print_version()
 
 int read_arguments(const int argc, const char** argv, factory::Launcher::parameters &params)
 {
+	//pulls arguments and parces them into an object that can be used.
 	tools::Argument_handler ah(argc, argv);
 
+	//sets up a std::map<Argument_tag, Argument_info*>
 	tools::Argument_map_info args;
+
+	//can't tell what the purpose of this is...
 	tools::Argument_map_group arg_group;
 
 	std::vector<std::string> cmd_warn, cmd_error;
 
+	//I believe this determines what codex is going to be run
 	params.get_description(args);
 
 	auto arg_vals = ah.parse_arguments(args, cmd_warn, cmd_error);
@@ -170,6 +176,7 @@ int read_arguments(const int argc, const char** argv, factory::Launcher::paramet
 	bool display_help = false;
 	try
 	{
+		//store all of the arguments into the argument handler object
 		params.store(arg_vals);
 		ah.set_help_display_keys(params.display_keys);
 	}
@@ -207,7 +214,7 @@ int sc_main(int argc, char **argv)
 #ifdef AFF3CT_MPI
 	MPI_Init(nullptr, nullptr);
 #endif
-
+	//set up the program based on the user arguments
 	factory::Launcher::parameters params("sim");
 	if (read_arguments(argc, (const char**)argv, params) == EXIT_FAILURE)
 		return EXIT_FAILURE;
@@ -229,6 +236,7 @@ int sc_main(int argc, char **argv)
 #endif
 		if (launcher != nullptr)
 		{
+			//this is where the magic happens and exit code stores the result of the operation
 			exit_code = launcher->launch();
 			delete launcher;
 		}

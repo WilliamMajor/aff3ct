@@ -163,7 +163,7 @@ int Launcher::launch()
 		return EXIT_FAILURE;
 	}
 
-	// write the command and he curve name in the PyBER format
+	// write the command and the curve name in the PyBER format
 #ifdef AFF3CT_MPI
 	if (this->params_common.mpi_rank == 0)
 #endif
